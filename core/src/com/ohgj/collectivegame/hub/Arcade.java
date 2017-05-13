@@ -1,5 +1,6 @@
 package com.ohgj.collectivegame.hub;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -8,6 +9,7 @@ import com.ohgj.engine.Components.Body;
 import com.ohgj.engine.Components.BoxBody;
 import com.ohgj.engine.Components.BoxRenderer;
 import com.ohgj.engine.Components.ConeLight;
+import com.ohgj.engine.Components.SpriteRenderer;
 import com.ohgj.engine.Components.Text;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.AbstractGameObject;
@@ -25,10 +27,11 @@ public class Arcade extends AbstractGameObject {
 
         this.action = action;
 
-        body = new BoxBody(this, 0.4f, 0.4f, BodyDef.BodyType.StaticBody, false);
+        body = new BoxBody(this, 0.4f, 0.3f, BodyDef.BodyType.StaticBody, false);
         addComponent(body);
 
-        addComponent(new BoxRenderer(this, 0.4f, 0.4f, Color.GREEN));
+        //addComponent(new BoxRenderer(this, 0.4f, 0.4f, Color.GREEN));
+        addComponent(new SpriteRenderer(this, Gdx.files.internal("console.png"), 0, 0, 0.4f, 0.3f));
 
         text = new Text(this, GameClass.font12, "Press enter", Color.WHITE);
         text.getColor().a = 0;
