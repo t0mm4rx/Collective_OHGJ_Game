@@ -59,9 +59,11 @@ public class Ball extends AbstractGameObject {
         // You're welcome :) Here we will do the screen bounds collisions
         // Do you understand that part ?
         if (getTransform().getPosition().x < 0) {
+            ((PongGame)Game.getCurrentScreen()).scoreRight++;
             init();
         }
         if (getTransform().getPosition().x > Game.size.x) {
+            ((PongGame)Game.getCurrentScreen()).scoreLeft++;
             init();
         }
         if (getTransform().getPosition().y < 0 || getTransform().getPosition().y > Game.size.y) {
