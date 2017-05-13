@@ -32,28 +32,36 @@ Note that in this lib, 1 unit represents 100 pixels, so if you draw a square tha
 In this class you will have a few methods :
 ```java
 
-class MyGame extends MiniGame {
+public class TestMiniGame extends MiniGame {
 
-    public MyGame(Game game) {
-        super(game);
-        //I don't recommand you to write anything here
+    public void draw() {
+        Draw.rect(1, 1, 1, 1, Color.BLUE);
     }
 
-    void show() {
-        //Will be called when the game is created, so here are initialization stuffs, like object creation and so.
+    public void update() {
+
     }
 
-    void update() {
-        //Update function, called every 16ms
-    }
+    public void show() {
 
-    void render() {
-        //Here you can draw all your stuffs, with the Draw class
-        Draw.rect(1, 1, 1, 1, Color.RED);
     }
-
 }
 
+```
+To link your game to an arcade (in the show function of the ArcadeRoom class) :
+```java
+add(new Arcade(new Vector2(5, 5), () -> {
+            loadMiniGame(new TestMiniGame());
+            return false;
+        }));
+        add(new Arcade(new Vector2(6, 5), () -> {
+            loadMiniGame(new MyMiniGame());
+            return false;
+        }));
+        add(new Arcade(new Vector2(7, 5), () -> {
+            loadMiniGame(new MyMiniGame());
+            return false;
+        }));
 ```
 
 

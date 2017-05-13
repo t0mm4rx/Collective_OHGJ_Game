@@ -2,6 +2,8 @@ package com.ohgj.collectivegame.hub;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.ohgj.collectivegame.game.MiniGame;
+import com.ohgj.collectivegame.minigames.TestMiniGame;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.Game;
 import com.ohgj.engine.Game.Screen;
@@ -10,6 +12,7 @@ import com.ohgj.engine.IO.Keys;
 public class ArcadeRoom extends Screen {
 
     Player player;
+    boolean hasQuitted = false;
 
     public ArcadeRoom(Game game) {
         super(game);
@@ -27,7 +30,7 @@ public class ArcadeRoom extends Screen {
 
         // Adding arcades
         add(new Arcade(new Vector2(5, 5), () -> {
-            System.out.println("1");
+            loadMiniGame(new TestMiniGame());
             return false;
         }));
         add(new Arcade(new Vector2(6, 5), () -> {
@@ -47,6 +50,17 @@ public class ArcadeRoom extends Screen {
 
     public void renderAfter() {
 
+    }
+
+    private void loadMiniGame(MiniGame game) {
+        if (!hasQuitted) {
+            fadeOut(0.4f);
+            Game.waitAndDo(400, () -> {
+                setScreen(game);
+                return false;
+            });
+            hasQuitted = true;
+        }
     }
 
     public void update() {
