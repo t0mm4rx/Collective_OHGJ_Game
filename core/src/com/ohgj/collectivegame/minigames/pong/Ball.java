@@ -49,14 +49,14 @@ public class Ball extends AbstractGameObject {
                     vel.y += Math.random(-0.4f, 0.4f);
                     ((Racket) b).height = 1.1f;
                     vel.scl(1.1f);
-                    ((PongGame) Game.getCurrentScreen()).bg.a = 0.1f;
+                    ((PongGame) Game.getCurrentScreen()).shake(vel.len() / 20, 100f);
                 }
                 if (b.getTag().equals("Ball") && a.getTag().equals("Racket")) {
                     vel.x = -vel.x;
                     vel.y += Math.random(-0.4f, 0.4f);
                     ((Racket) a).height = 1.1f;
                     vel.scl(1.1f);
-                    //((PongGame) Game.getCurrentScreen()).shake);
+                    ((PongGame) Game.getCurrentScreen()).shake(vel.len() / 20, 100f);
                 }
             }
 
@@ -73,10 +73,12 @@ public class Ball extends AbstractGameObject {
         if (getTransform().getPosition().x < 0) {
             ((PongGame)Game.getCurrentScreen()).scoreRight++;
             init();
+            ((PongGame) Game.getCurrentScreen()).bg.a = 0.3f;
         }
         if (getTransform().getPosition().x > Game.size.x) {
             ((PongGame)Game.getCurrentScreen()).scoreLeft++;
             init();
+            ((PongGame) Game.getCurrentScreen()).bg.a = 0.3f;
         }
         if (getTransform().getPosition().y < 0 || getTransform().getPosition().y > Game.size.y) {
             vel.y = -vel.y;
