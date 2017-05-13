@@ -29,6 +29,7 @@ Texture a = new Texture("minigames/myawesomegame/a.png");
 ### Creating a minigame
 To create a mini game, create a class in the minigames package, wich extends the MiniGame class.
 Note that in this lib, 1 unit represents 100 pixels, so if you draw a square that's 1 width it will be 100 pixels width on the screen. Same for location and so (just like in Unity).
+*Please create a new git branch for new minigames*
 In this class you will have a few methods :
 ```java
 
