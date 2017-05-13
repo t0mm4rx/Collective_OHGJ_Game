@@ -22,6 +22,7 @@ public class ArcadeRoom extends Screen {
         // init stuff here
 
         world.setGravity(new Vector2(0, 0));
+        areLightsEnabled(true);
 
         // Transform object contains location, scale and rotation. Game.center is a vector that contains screen center coordonates.
         player = new Player(new Transform(Game.center));

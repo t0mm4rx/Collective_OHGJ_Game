@@ -2,6 +2,7 @@ package com.ohgj.collectivegame.hub;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.ohgj.engine.Components.Body;
 import com.ohgj.engine.Components.BoxBody;
@@ -9,7 +10,6 @@ import com.ohgj.engine.Components.BoxRenderer;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.AbstractGameObject;
 import com.ohgj.engine.Game.Game;
-import com.ohgj.engine.Game.GameObject;
 import com.ohgj.engine.IO.Keys;
 
 public class Player extends AbstractGameObject {
@@ -69,6 +69,10 @@ public class Player extends AbstractGameObject {
         } else {
             getNearestArcade().text.setColor(new Color(1, 1, 1, 0));
         }
+
+        Vector3 diff = Game.getCurrentScreen().camera.position.cpy().sub(new Vector3(body.getBody().getPosition(), 0)).scl(-0.05f);
+
+        Game.getCurrentScreen().camera.translate(diff);
 
     }
 

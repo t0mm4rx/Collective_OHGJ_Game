@@ -218,6 +218,13 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
             }
         }
 
+        if (lightsEnabled) {
+            Game.batch.end();
+            rayHandler.setCombinedMatrix(camera);
+            rayHandler.updateAndRender();
+            Game.batch.begin();
+        }
+
         Vector2 cam_move = new Vector2(camera.position.x - lastCamPosition.x, camera.position.y - lastCamPosition.y);
         for (Drawable d : drawables) {
             if (d.isGameObject()) {
@@ -232,13 +239,6 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
             d.update();
         }
         renderAfter();
-
-        if (lightsEnabled) {
-            Game.batch.end();
-            rayHandler.setCombinedMatrix(camera);
-            rayHandler.updateAndRender();
-            Game.batch.begin();
-        }
 
         if (Game.debugging) {
             //Draw gride

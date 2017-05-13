@@ -16,12 +16,22 @@ public class Text extends Component {
     BitmapFont font;
     GlyphLayout glyphLayout;
     Color color;
-    int offsetX, offsetY;
+    float offsetX, offsetY;
 
     public Text(AbstractGameObject go, String text, Color color) {
         super(go);
         this.text = text;
         font = new BitmapFont();
+        glyphLayout = new GlyphLayout();
+        this.color = color;
+        offsetX = 0;
+        offsetY = 0;
+    }
+
+    public Text(AbstractGameObject go, BitmapFont font, String text, Color color) {
+        super(go);
+        this.text = text;
+        this.font = font;
         glyphLayout = new GlyphLayout();
         this.color = color;
         offsetX = 0;
@@ -65,7 +75,7 @@ public class Text extends Component {
         );
     }
 
-    public void setOffset(int x, int y) {
+    public void setOffset(float x, float y) {
         this.offsetX = x * 100;
         this.offsetY = y * 100;
     }

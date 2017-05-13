@@ -8,21 +8,22 @@ import com.ohgj.engine.Game.AbstractGameObject;
 import com.ohgj.engine.Game.Game;
 
 public class ConeLight extends Component{
-    private int power, length;
+    private int power;
     private Color color;
     private box2dLight.ConeLight light;
     private float direction;
+    private float length;
     private float lastX, lastY;
     private RayHandler rayHandler;
 
-    public ConeLight(AbstractGameObject go, int power, int length, Color color, float direction, float field) {
+    public ConeLight(AbstractGameObject go, int power, float length, Color color, float direction, float field) {
         super(go);
         this.power = power;
         this.length = length;
         this.color = color;
         this.direction = direction;
         this.rayHandler = Game.getCurrentScreen().getRayHandler();
-        light = new box2dLight.ConeLight(rayHandler, power, color, length, go.getTransform().getPosition().x, go.getTransform().getPosition().y, direction, field);
+        light = new box2dLight.ConeLight(rayHandler, power, color, length, go.getTransform().getPosition().x + offsetX, go.getTransform().getPosition().y + offsetY, direction, field);
         lastX = go.getTransform().getPosition().x;
         lastY = go.getTransform().getPosition().y;
     }
@@ -55,10 +56,10 @@ public class ConeLight extends Component{
     }
 
     public void update() {
-        if (getGameObject().getTransform().getPosition().x != lastX || getGameObject().getTransform().getPosition().y != lastY) {
-            light.setPosition(getGameObject().getTransform().getPosition().x, getGameObject().getTransform().getPosition().y);
-            lastX = getGameObject().getTransform().getPosition().x;
-            lastY = getGameObject().getTransform().getPosition().y;
+        if (getGameObject().getTransform().getPosition().x + offsetX != lastX || getGameObject().getTransform().getPosition().y + offsetY != lastY) {
+            light.setPosition(getGameObject().getTransform().getPosition().x + offsetX, getGameObject().getTransform().getPosition().y + offsetY);
+            lastX = getGameObject().getTransform().getPosition().x + offsetX;
+            lastY = getGameObject().getTransform().getPosition().y + offsetY;
         }
     }
 
@@ -66,4 +67,14 @@ public class ConeLight extends Component{
         light.setDistance(0);
         light.dispose();
     }
+
+    public float getLength() {
+        return length;
+    }
+
+    public void setLength(float length) {
+        this.length = length;
+        light.setDistance(length);
+    }
+
 }

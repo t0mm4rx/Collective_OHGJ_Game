@@ -3,9 +3,11 @@ package com.ohgj.collectivegame.hub;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.ohgj.collectivegame.GameClass;
 import com.ohgj.engine.Components.Body;
 import com.ohgj.engine.Components.BoxBody;
 import com.ohgj.engine.Components.BoxRenderer;
+import com.ohgj.engine.Components.ConeLight;
 import com.ohgj.engine.Components.Text;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.AbstractGameObject;
@@ -28,8 +30,9 @@ public class Arcade extends AbstractGameObject {
 
         addComponent(new BoxRenderer(this, 0.4f, 0.4f, Color.GREEN));
 
-        text = new Text(this, "Press enter", Color.WHITE);
+        text = new Text(this, GameClass.font12, "Press enter", Color.WHITE);
         text.getColor().a = 0;
+        text.setOffset(-0.5f, 0.4f);
         addComponent(text);
 
         // We set a tag for the player can get them from the screen
