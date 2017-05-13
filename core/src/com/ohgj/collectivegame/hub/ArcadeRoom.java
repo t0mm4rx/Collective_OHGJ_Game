@@ -1,11 +1,13 @@
 package com.ohgj.collectivegame.hub;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.ohgj.collectivegame.game.MiniGame;
 import com.ohgj.collectivegame.minigames.TestMiniGame;
 import com.ohgj.collectivegame.minigames.pong.PongGame;
 import com.ohgj.engine.Components.Transform;
+import com.ohgj.engine.Game.Draw;
 import com.ohgj.engine.Game.Game;
 import com.ohgj.engine.Game.Screen;
 import com.ohgj.engine.IO.Keys;
@@ -14,6 +16,7 @@ public class ArcadeRoom extends Screen {
 
     Player player;
     boolean hasQuitted = false;
+    public static Texture ground;
 
     public ArcadeRoom(Game game) {
         super(game);
@@ -24,6 +27,8 @@ public class ArcadeRoom extends Screen {
 
         world.setGravity(new Vector2(0, 0));
         areLightsEnabled(true);
+
+        ground = new Texture("ground.jpg");
 
         // Transform object contains location, scale and rotation. Game.center is a vector that contains screen center coordonates.
         player = new Player(new Transform(Game.center));
@@ -46,10 +51,17 @@ public class ArcadeRoom extends Screen {
             return false;
         }));
 
+        fadeIn(0.2f);
+
     }
 
     public void renderBefore() {
-
+        for (float x = 0; x < Game.size.x; x += 0.32f) {
+            for (float y = 0; y < Game.size.y; y += 0.32f) {
+                Draw.texture(ground, x, y, 0.32f, 0.32f);
+            }
+        }
+        //Draw.texture(ground, Game.center.x, Game.center.y, 0.32f, 0.32f);
     }
 
     public void renderAfter() {

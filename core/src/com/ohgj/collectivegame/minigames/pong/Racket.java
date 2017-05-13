@@ -23,7 +23,6 @@ public class Racket extends AbstractGameObject {
         height = 1f;
 
         body = new BoxBody(this, width, height, BodyDef.BodyType.KinematicBody, false);
-        // Then we add it to the gameobject
         addComponent(body);
 
         addComponent(new BoxRenderer(this, width, height, new Color(1, 1, 1, 1)));
