@@ -1,9 +1,11 @@
 package com.ohgj.collectivegame.minigames.pong;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.ohgj.engine.Components.Body;
 import com.ohgj.engine.Components.BoxBody;
+import com.ohgj.engine.Components.BoxRenderer;
 import com.ohgj.engine.Components.SpriteRenderer;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.AbstractGameObject;
@@ -24,7 +26,7 @@ public class Racket extends AbstractGameObject {
         // Then we add it to the gameobject
         addComponent(body);
 
-        addComponent(new SpriteRenderer(this, Gdx.files.internal("texture.jpg"), 0, 0, width, height));
+        addComponent(new BoxRenderer(this, width, height, new Color(1, 1, 1, 1)));
 
         setTag("Racket");
 

@@ -2,6 +2,7 @@ package com.ohgj.collectivegame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.ohgj.collectivegame.hub.ArcadeRoom;
 import com.ohgj.collectivegame.minigames.pong.PongGame;
 import com.ohgj.engine.Game.Game;
@@ -11,6 +12,7 @@ public class GameClass extends Game {
 
 	// Some static assets that will be used everywhere
 	public static BitmapFont font12, font15, font20;
+	public static GlyphLayout gl;
 
 	public void init() {
 
@@ -18,6 +20,8 @@ public class GameClass extends Game {
 		font12 = Util.ttfToBitmap(Gdx.files.internal("GUI/font.ttf"), 12);
 		font15 = Util.ttfToBitmap(Gdx.files.internal("GUI/font.ttf"), 15);
 		font20 = Util.ttfToBitmap(Gdx.files.internal("GUI/font.ttf"), 20);
+
+		gl = new GlyphLayout();
 
 		setScreen(new ArcadeRoom(this));
 	}

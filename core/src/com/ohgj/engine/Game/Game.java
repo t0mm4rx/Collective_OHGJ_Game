@@ -4,6 +4,7 @@ package com.ohgj.engine.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -31,6 +32,8 @@ public abstract class Game extends com.badlogic.gdx.Game {
     public static Vector2 center;
     public static Vector2 size;
 
+    public static GlyphLayout glyphLayout;
+
     public void create() {
         Box2D.init();
         debugging = false;
@@ -42,6 +45,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
         waitAndDo = new WaitAndDo();
         center = new Vector2(Gdx.graphics.getWidth() / 2 / 100, Gdx.graphics.getHeight() / 2 / 100);
         size = new Vector2(Gdx.graphics.getWidth() / 100, Gdx.graphics.getHeight() / 100);
+        glyphLayout = new GlyphLayout();
         init();
         Keys.init();
     }

@@ -10,14 +10,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Draw {
 
-    public static void text(String text, float x, float y, Color color, BitmapFont font, GlyphLayout glyphLayout) {
+    public static void text(String text, float x, float y, Color color, BitmapFont font) {
         Game.batch.setProjectionMatrix(Game.getCurrentScreen().camera.combined.cpy().scale(0.01f, 0.01f, 1));
-        glyphLayout.setText(font, text);
+        Game.glyphLayout.setText(font, text);
         font.setColor(color);
         font.draw(Game.batch,
                 text,
-                x * 100 - glyphLayout.width / 2 / 100,
-                y * 100 - glyphLayout.height / 2 / 100
+                x * 100 - Game.glyphLayout.width / 2 / 100,
+                y * 100 - Game.glyphLayout.height / 2 / 100
         );
         Game.batch.setProjectionMatrix(Game.getCurrentScreen().camera.combined.cpy().scale(1f, 1f, 1f));
     }
