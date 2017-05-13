@@ -16,7 +16,7 @@ public class Player extends AbstractGameObject {
 
     Body body;
 
-    final float maxSpeed = 10f;
+    final float maxSpeed = 10f, acc = 0.4f;
 
     public Player(Transform transform) {
         super(transform);
@@ -29,6 +29,8 @@ public class Player extends AbstractGameObject {
         // We add boxrenderer that will simply show a red square, for placeholder
         addComponent(new BoxRenderer(this, 0.2f, 0.2f, Color.RED));
 
+        setTag("Player");
+
     }
 
     protected void update(float delta) {
@@ -36,24 +38,26 @@ public class Player extends AbstractGameObject {
         // Keyboard handling
         if (Keys.isKeyPressed(Input.Keys.RIGHT) || Keys.isKeyPressed(Input.Keys.D)) {
             if (body.getBody().getLinearVelocity().x < maxSpeed) {
-                body.getBody().applyForceToCenter(0.2f, 0, false);
+                body.getBody().applyForceToCenter(acc, 0, false);
             }
         }
         if (Keys.isKeyPressed(Input.Keys.LEFT) || Keys.isKeyPressed(Input.Keys.A)) {
             if (body.getBody().getLinearVelocity().x > -maxSpeed) {
-                body.getBody().applyForceToCenter(-0.2f, 0, false);
+                body.getBody().applyForceToCenter(-acc, 0, false);
             }
         }
         if (Keys.isKeyPressed(Input.Keys.UP) || Keys.isKeyPressed(Input.Keys.W)) {
             if (body.getBody().getLinearVelocity().y < maxSpeed) {
-                body.getBody().applyForceToCenter(0, 0.2f, false);
+                body.getBody().applyForceToCenter(0, acc, false);
             }
         }
         if (Keys.isKeyPressed(Input.Keys.DOWN) || Keys.isKeyPressed(Input.Keys.S)) {
             if (body.getBody().getLinearVelocity().y > -maxSpeed) {
-                body.getBody().applyForceToCenter(0, -0.2f, false);
+                body.getBody().applyForceToCenter(0, -acc, false);
             }
         }
+
+        body.getBody().applyForceToCenter(body.getBody().getLinearVelocity().scl(-0.2f), false);
 
         body.getBody().setAwake(true);
 
