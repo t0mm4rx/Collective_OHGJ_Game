@@ -14,6 +14,7 @@ public class PongGame extends MiniGame {
 
     Racket racket1, racket2;
     public int scoreLeft = 0, scoreRight = 0;
+    Color bg;
 
     public void show() {
 
@@ -32,9 +33,14 @@ public class PongGame extends MiniGame {
 
         add(new Ball());
 
+        bg = new Color(1, 1, 1, 0);
+
     }
 
     public void draw() {
+
+        Draw.rect(Game.center.x, Game.center.y, Game.size.x, Game.size.y, bg);
+
         Draw.rect(Game.center.x, Game.center.y, 0.01f, Game.size.y, new Color(1, 1, 1, 1));
         Draw.text("" + scoreLeft, Game.center.x / 2, Game.size.y - 1, new Color(1, 1, 1, 1), GameClass.font15);
         Draw.text("" + scoreRight, Game.center.x / 2 + 5, Game.size.y - 1, new Color(1, 1, 1, 1), GameClass.font15);
@@ -57,6 +63,8 @@ public class PongGame extends MiniGame {
         if (Keys.isKeyPressed(Input.Keys.DOWN) && racket2.body.getBody().getPosition().y > racket2.height / 2) {
             racket2.body.getBody().setTransform(racket2.body.getBody().getPosition().add(0, -0.1f), 0);
         }
+
+        bg.a += -bg.a / 20;
 
         // Is there anything you want i show you ?
     }

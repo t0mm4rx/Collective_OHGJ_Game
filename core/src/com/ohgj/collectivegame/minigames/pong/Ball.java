@@ -11,6 +11,7 @@ import com.ohgj.engine.Components.Body;
 import com.ohgj.engine.Components.BoxBody;
 import com.ohgj.engine.Components.BoxRenderer;
 import com.ohgj.engine.Components.CircleBody;
+import com.ohgj.engine.Components.ParticleManager;
 import com.ohgj.engine.Components.SpriteRenderer;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.AbstractGameObject;
@@ -21,6 +22,7 @@ public class Ball extends AbstractGameObject {
 
     Body body;
     Vector2 vel;
+    ParticleManager pm;
 
     public Ball() {
         super(new Transform(Game.center));
@@ -33,18 +35,28 @@ public class Ball extends AbstractGameObject {
 
         addComponent(new BoxRenderer(this, 0.1f, 0.1f, new Color(1, 1, 1, 1)));
 
+        pm = new ParticleManager(this);
+        addComponent(pm);
+
         setTag("Ball");
         init();
+        addParticle();
 
         new CollisionsManager(new CollisionsListener() {
             public void collisionEnter(AbstractGameObject a, AbstractGameObject b, Contact contact) {
                 if (a.getTag().equals("Ball") && b.getTag().equals("Racket")) {
                     vel.x = -vel.x;
                     vel.y += Math.random(-0.4f, 0.4f);
+                    ((Racket) b).height = 1.1f;
+                    vel.scl(1.1f);
+                    ((PongGame) Game.getCurrentScreen()).bg.a = 0.1f;
                 }
                 if (b.getTag().equals("Ball") && a.getTag().equals("Racket")) {
                     vel.x = -vel.x;
                     vel.y += Math.random(-0.4f, 0.4f);
+                    ((Racket) a).height = 1.1f;
+                    vel.scl(1.1f);
+                    //((PongGame) Game.getCurrentScreen()).shake);
                 }
             }
 
@@ -77,6 +89,14 @@ public class Ball extends AbstractGameObject {
         vel = Math.randomVector2(3);
         getTransform().getPosition().set(Game.center);
         body.getBody().setTransform(Game.center, 0);
+    }
+
+    private void addParticle() {
+        Game.waitAndDo(100, () -> {
+            pm.addParticle(new BallParticle(new Transform(getTransform().getPosition().cpy())));
+            addParticle();
+            return false;
+        });
     }
 
 }
