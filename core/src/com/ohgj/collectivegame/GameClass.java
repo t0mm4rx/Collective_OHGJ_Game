@@ -3,6 +3,7 @@ package com.ohgj.collectivegame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.ohgj.collectivegame.hub.ArcadeRoom;
+import com.ohgj.collectivegame.minigames.pong.PongGame;
 import com.ohgj.engine.Game.Game;
 import com.ohgj.engine.Util.Util;
 

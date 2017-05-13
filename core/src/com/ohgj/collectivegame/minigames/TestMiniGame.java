@@ -10,6 +10,11 @@ public class TestMiniGame extends MiniGame {
         Draw.rect(1, 1, 1, 1, Color.BLUE);
     }
 
+    @Override
+    public void renderBefore() {
+
+    }
+
     public void update() {
 
     }
