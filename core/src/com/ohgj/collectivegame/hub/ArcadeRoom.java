@@ -51,6 +51,8 @@ public class ArcadeRoom extends Screen {
             return false;
         }));
 
+        fadeIn(0.2f);
+
     }
 
     public void renderBefore() {

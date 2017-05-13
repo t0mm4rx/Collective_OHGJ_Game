@@ -30,7 +30,6 @@ public class Arcade extends AbstractGameObject {
         body = new BoxBody(this, 0.4f, 0.3f, BodyDef.BodyType.StaticBody, false);
         addComponent(body);
 
-        //addComponent(new BoxRenderer(this, 0.4f, 0.4f, Color.GREEN));
         addComponent(new SpriteRenderer(this, Gdx.files.internal("console.png"), 0, 0, 0.4f, 0.3f));
 
         text = new Text(this, GameClass.font12, "Press enter", Color.WHITE);
