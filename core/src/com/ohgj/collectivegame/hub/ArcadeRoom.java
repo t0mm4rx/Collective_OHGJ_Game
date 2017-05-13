@@ -25,6 +25,20 @@ public class ArcadeRoom extends Screen {
         // We add the player to the screen
         add(player);
 
+        // Adding arcades
+        add(new Arcade(new Vector2(5, 5), () -> {
+            System.out.println("1");
+            return false;
+        }));
+        add(new Arcade(new Vector2(6, 5), () -> {
+            System.out.println("2");
+            return false;
+        }));
+        add(new Arcade(new Vector2(7, 5), () -> {
+            System.out.println("3");
+            return false;
+        }));
+
     }
 
     public void renderBefore() {

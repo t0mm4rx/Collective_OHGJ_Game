@@ -8,6 +8,8 @@ import com.ohgj.engine.Components.BoxBody;
 import com.ohgj.engine.Components.BoxRenderer;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.AbstractGameObject;
+import com.ohgj.engine.Game.Game;
+import com.ohgj.engine.Game.GameObject;
 import com.ohgj.engine.IO.Keys;
 
 public class Player extends AbstractGameObject {
@@ -30,7 +32,6 @@ public class Player extends AbstractGameObject {
     }
 
     protected void update(float delta) {
-
 
         // Keyboard handling
         if (Keys.isKeyPressed(Input.Keys.RIGHT) || Keys.isKeyPressed(Input.Keys.D)) {
@@ -56,5 +57,28 @@ public class Player extends AbstractGameObject {
 
         body.getBody().setAwake(true);
 
+        if (getNearestArcade().body.getBody().getPosition().dst(body.getBody().getPosition()) < 1) {
+            getNearestArcade().text.setColor(new Color(1, 1, 1, 1));
+            if (Keys.isKeyJustPressed(Input.Keys.ENTER)) {
+                getNearestArcade().doAction();
+            }
+        } else {
+            getNearestArcade().text.setColor(new Color(1, 1, 1, 0));
+        }
+
+    }
+
+    private Arcade getNearestArcade() {
+        Arcade a = null;
+        for (AbstractGameObject go : Game.getCurrentScreen().getGameObjectsByTag("Arcade")) {
+            ((Arcade) go).text.setColor(new Color(1, 1, 1, 0));
+            if (a == null) {
+                a = ((Arcade) go);
+            }
+            if (a.body.getBody().getPosition().dst(body.getBody().getPosition()) > ((Arcade)go).body.getBody().getPosition().dst(body.getBody().getPosition())) {
+                a = ((Arcade) go);
+            }
+        }
+        return a;
     }
 }

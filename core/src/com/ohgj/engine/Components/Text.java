@@ -66,8 +66,8 @@ public class Text extends Component {
     }
 
     public void setOffset(int x, int y) {
-        this.offsetX = x;
-        this.offsetY = y;
+        this.offsetX = x * 100;
+        this.offsetY = y * 100;
     }
 
     public Color getColor () {
