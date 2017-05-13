@@ -18,7 +18,7 @@ TODO:
 
 ## How it works
 
-First, please don't edit the engine package.
+First, please don't edit the engine package, and don't touch the desktop folder. All the game's code will be in the core/src folder.
 All your assets should be placed in the core/assets/minigames/yourgamename/.
 For example, if you want to add a texture, named a.png, put it in : core/assets/minigames/myawesomegame/a.png
 In the code :
