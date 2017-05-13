@@ -34,6 +34,7 @@ public class PongGame extends MiniGame {
         add(new Ball());
 
         bg = new Color(1, 1, 1, 0);
+        fadeIn(0.6f);
 
     }
 

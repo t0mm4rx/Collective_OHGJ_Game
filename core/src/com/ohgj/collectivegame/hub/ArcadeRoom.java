@@ -25,6 +25,10 @@ public class ArcadeRoom extends Screen {
     public void show() {
         // init stuff here
 
+        fadeIn(0.6f);
+
+        camera.zoom = 0.7f;
+
         world.setGravity(new Vector2(0, 0));
         areLightsEnabled(true);
 
@@ -50,8 +54,6 @@ public class ArcadeRoom extends Screen {
             System.out.println("3");
             return false;
         }));
-
-        fadeIn(0.2f);
 
     }
 
@@ -84,6 +86,12 @@ public class ArcadeRoom extends Screen {
         // If escape is pressed, the debug mode will be swithed
         if (Keys.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Game.debugging = !Game.debugging;
+        }
+
+        if (hasQuitted) {
+            camera.zoom -= 0.03f;
+        } else {
+            camera.zoom += (1 - camera.zoom) / 10;
         }
     }
 

@@ -66,13 +66,14 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         lightsEnabled = false;
         lastCamPosition = new Vector2();
         overlay = new GameObject(new Transform(Game.center));
-        overlay.addComponent(new BoxRenderer(overlay, Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight() * 2, new Color(0f, 0f, 0f, 0f)));
+        overlay.addComponent(new BoxRenderer(overlay, Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight() * 2, new Color(0f, 0f, 0f, 1f)));
         overlay.setLayout(1000);
         addInHUD(overlay);
         stage = new Stage();
         stage.setViewport(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Gdx.input.setInputProcessor(stage);
         id = UUID.randomUUID().toString();
+        fadeIn(0.1f);
     }
 
     public abstract void renderBefore();
@@ -280,7 +281,6 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
     }
 
     public void renderHUD() {

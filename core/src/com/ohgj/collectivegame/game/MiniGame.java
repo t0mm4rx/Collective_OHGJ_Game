@@ -12,7 +12,6 @@ public abstract class MiniGame extends Screen{
 
     public MiniGame() {
         super(Game.getCurrentScreen().game);
-        fadeIn(0.2f);
     }
 
     public void renderBefore() {
