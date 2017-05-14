@@ -1,5 +1,6 @@
 package com.ohgj.collectivegame.minigames.crazyRoad;
 
+import java.util.Random;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -14,10 +15,14 @@ public class crazyRoadGame extends MiniGame{
 
     private String name = "Crazy Road";
 
+    Random random;
 
     private Player player;
+    private int playerPos = 0;
     private boolean keyHeldDown = false;
 
+    private Obstacle[] obstacles = new Obstacle[]{};
+    private Vector2[] obstacleSpawns = new Vector2[] {new Vector2(Game.center.x, Game.center.y + 5)};
 
     public void draw() {
         Draw.rect(Game.center.x + 0.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
@@ -28,13 +33,16 @@ public class crazyRoadGame extends MiniGame{
     }
 
     public void show() {
+        random = new Random();
+
         //camera.position = new Vector3(Game.center.x, Game.center.y, camera.position.z);
-        world.setGravity(new Vector2(0, 0));
+        //world.setGravity(new Vector2(0f, 0f));
 
         player = new Player(new Transform(new Vector2(Game.center.x, Game.center.y - 2)));
 
         add(player);
 
+        createObstacle();
     }
 
     public void update() {
@@ -44,13 +52,16 @@ public class crazyRoadGame extends MiniGame{
 
     private void HandlePlayerInput(Body body, int left, int right){
 
+
         if(Keys.isKeyJustPressed(left) && !keyHeldDown){
             //Move Left
             Vector2 newPos = body.getBody().getPosition();
             newPos.x -= 1;
-            if(newPos.x >= Game.center.x - 1.5f || newPos.x <=Game.center.x + 1.5f)
-                body.getBody().setTransform(newPos, 0);
 
+            if(playerPos > - 1) {
+                body.getBody().setTransform(newPos, 0);
+                playerPos -= 1;
+            }
 
             keyHeldDown = true;
         }
@@ -58,8 +69,11 @@ public class crazyRoadGame extends MiniGame{
             //Move Right
             Vector2 newPos = body.getBody().getPosition();
             newPos.x += 1;
-            if(newPos.x >= Game.center.x - 1.5f || newPos.x <=Game.center.x + 1.5f)
+
+            if(playerPos < 1) {
                 body.getBody().setTransform(newPos, 0);
+                playerPos += 1;
+            }
 
 
             keyHeldDown = true;
@@ -72,6 +86,17 @@ public class crazyRoadGame extends MiniGame{
 
     public String getGameName() {
         return name;
+    }
+
+    private void createObstacle(){
+        //Vector2 spawnPos = obstacleSpawns[random.nextInt(obstacleSpawns.length)];
+
+        Vector2 spawnPos = new Vector2(Game.center.x, Game.center.y + 0);
+
+        Obstacle obstacle = new Obstacle(new Transform(spawnPos));
+        //obstacles[obstacles.length + 1] = obstacle;
+
+        add(obstacle);
     }
 
 }
