@@ -24,6 +24,8 @@ public class Interactable extends AbstractGameObject {
     Text text;
     Callable action;
 
+
+
     public Interactable(Vector2 position, FileHandle texture, Callable action) {
         super(new Transform(position));
 
