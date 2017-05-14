@@ -48,8 +48,15 @@ public class PongGame extends MiniGame {
     }
 
     public void update() {
-
         // Here is the update loop, we can check here keyboard inputs
+        handleInputs();
+
+        bg.a += -bg.a / 20;
+        // Is there anything you want i show you ?
+    }
+
+
+    public void handleInputs() {
         // For left player
         if (Keys.isKeyPressed(Input.Keys.W) && racket1.body.getBody().getPosition().y < Game.size.y - racket1.height / 2) {
             racket1.body.getBody().setTransform(racket1.body.getBody().getPosition().add(0, 0.1f), 0);
@@ -65,8 +72,5 @@ public class PongGame extends MiniGame {
             racket2.body.getBody().setTransform(racket2.body.getBody().getPosition().add(0, -0.1f), 0);
         }
 
-        bg.a += -bg.a / 20;
-
-        // Is there anything you want i show you ?
     }
 }
