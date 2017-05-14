@@ -29,6 +29,7 @@ public class Obstacle extends AbstractGameObject{
 
 
         body = new BoxBody(this, 0.5f, 0.5f, BodyDef.BodyType.DynamicBody, false);
+        addComponent(body);
 
         addComponent(new SpriteRenderer(this, setSprite(), 0, 0, 0.5f, 0.5f));
     }
