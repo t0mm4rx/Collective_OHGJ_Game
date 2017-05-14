@@ -12,6 +12,9 @@ import com.ohgj.engine.IO.Keys;
 
 public class crazyRoadGame extends MiniGame{
 
+    private String name = "Crazy Road";
+
+
     private Player player;
     private boolean keyHeldDown = false;
 
@@ -63,6 +66,10 @@ public class crazyRoadGame extends MiniGame{
         else{
             keyHeldDown = false;
         }
+    }
+
+    public String getGameName() {
+        return name;
     }
 
 }

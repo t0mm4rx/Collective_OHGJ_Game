@@ -12,6 +12,8 @@ import com.ohgj.engine.IO.Keys;
 
 public class PongGame extends MiniGame {
 
+    private String name = "Pong";
+
     Racket racket1, racket2;
     public int scoreLeft = 0, scoreRight = 0;
     Color bg;
@@ -72,5 +74,9 @@ public class PongGame extends MiniGame {
             racket2.body.getBody().setTransform(racket2.body.getBody().getPosition().add(0, -0.1f), 0);
         }
 
+    }
+
+    public String getGameName() {
+        return name;
     }
 }

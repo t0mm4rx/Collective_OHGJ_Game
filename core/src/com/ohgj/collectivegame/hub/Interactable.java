@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.ohgj.collectivegame.GameClass;
+import com.ohgj.collectivegame.game.MiniGame;
 import com.ohgj.engine.Components.Body;
 import com.ohgj.engine.Components.BoxBody;
 import com.ohgj.engine.Components.BoxRenderer;
@@ -26,7 +27,7 @@ public class Interactable extends AbstractGameObject {
 
 
 
-    public Interactable(Vector2 position, FileHandle texture, Callable action) {
+    public Interactable(Vector2 position, FileHandle texture, Callable action, MiniGame game) {
         super(new Transform(position));
 
         this.action = action;
@@ -41,9 +42,9 @@ public class Interactable extends AbstractGameObject {
 
         addComponent(new SpriteRenderer(this, texture, 0, 0, width, height));
 
-        text = new Text(this, GameClass.font12, "Press enter", Color.WHITE);
+        text = new Text(this, GameClass.font12, "Press enter to Join: \n"+game.getGameName(), Color.WHITE);
         text.getColor().a = 0;
-        text.setOffset(-0.5f, 0.4f);
+        text.setOffset(-0.5f, 0.7f);
         addComponent(text);
 
         // We set a tag for the player can get them from the screen

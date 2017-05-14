@@ -38,5 +38,5 @@ public abstract class MiniGame extends Screen{
     }
 
     public abstract void draw();
-
+    public abstract String getGameName();
 }

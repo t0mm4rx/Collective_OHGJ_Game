@@ -20,6 +20,8 @@ public class HoldUpGame extends MiniGame {
     private HoldUpPaddle paddle;
     Color bg;
 
+    private String name = "HoldUp";
+
     private static int score;
     private static int highScore;
 
@@ -45,6 +47,7 @@ public class HoldUpGame extends MiniGame {
         Draw.text("Your Score: " + score, Game.center.x / 2 -2.5f, Game.size.y - 0.2f, new Color(1, 1, 1, 1), GameClass.font12);
         Draw.text("HighScore: " + highScore, Game.center.x / 2 -2.5f, Game.size.y - 0.5f, new Color(1, 1, 1, 1), GameClass.font12);
     }
+
 
     public void update() {
         handleInputs();
@@ -83,5 +86,9 @@ public class HoldUpGame extends MiniGame {
     }
     public static void setScore(int val){
        score = val;
+    }
+
+    public String getGameName() {
+        return name;
     }
 }

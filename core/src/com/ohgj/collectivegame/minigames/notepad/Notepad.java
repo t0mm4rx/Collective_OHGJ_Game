@@ -20,6 +20,9 @@ public class Notepad extends MiniGame {
 
     final String URL = "https://jsonblob.com/api/jsonBlob/860cf92a-3891-11e7-ae4c-1f38b7c71da0";
 
+    private String name = "Notepad";
+
+
     TextArea textArea;
 
     String message = "Loading...", lastEdit = "";
@@ -96,6 +99,10 @@ public class Notepad extends MiniGame {
                 System.out.println(error);
             }
         });
+    }
+
+    public String getGameName() {
+        return name;
     }
 
 }
