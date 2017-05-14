@@ -30,7 +30,11 @@ public class fallingApplesGame extends MiniGame{
 
 
     public void draw() {
-        Draw.rect(Game.center.x, Game.center.y, 0.1f, 10f);
+        Draw.rect(Game.center.x + 0.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
+        Draw.rect(Game.center.x - 0.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
+
+        Draw.rect(Game.center.x + 1.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
+        Draw.rect(Game.center.x - 1.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
     }
 
     public void show() {
@@ -44,11 +48,13 @@ public class fallingApplesGame extends MiniGame{
     }
 
     public void update() {
-        HandlePlayerInput(player.body);
+        HandlePlayerInput(player.body, Input.Keys.A, Input.Keys.D);
+        HandlePlayerInput(player.body, Input.Keys.LEFT, Input.Keys.RIGHT);
     }
 
-    private void HandlePlayerInput(Body body){
-        if(Keys.isKeyJustPressed(Input.Keys.A) && !keyHeldDown){
+    private void HandlePlayerInput(Body body, int left, int right){
+
+        if(Keys.isKeyJustPressed(left) && !keyHeldDown){
             //Move Left
             Vector2 newPos = body.getBody().getPosition();
             newPos.x -= 1;
@@ -57,7 +63,7 @@ public class fallingApplesGame extends MiniGame{
 
             keyHeldDown = true;
         }
-        else if(Keys.isKeyJustPressed(Input.Keys.D) && !keyHeldDown){
+        else if(Keys.isKeyJustPressed(right) && !keyHeldDown){
             //Move Right
             Vector2 newPos = body.getBody().getPosition();
             newPos.x += 1;

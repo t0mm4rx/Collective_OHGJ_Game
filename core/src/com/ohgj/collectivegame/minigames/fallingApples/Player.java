@@ -31,7 +31,8 @@
             body = new BoxBody(this, 1f, 1f, BodyDef.BodyType.KinematicBody, false);
             addComponent(body);
 
-            addComponent(new BoxRenderer(this, 1f, 1f, new Color(1f, 1f, 1f, 1f)));
+            //TODO: Add a sprite
+            addComponent(new BoxRenderer(this, 1f, 1f, new Color(1f, 0.5f, 1f, 1f)));
         }
 
         protected void update(float delta) {
