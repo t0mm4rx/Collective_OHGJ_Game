@@ -9,6 +9,9 @@ import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.Draw;
 import com.ohgj.engine.Game.Game;
 import com.ohgj.engine.IO.Keys;
+import com.ohgj.engine.JSON.JSONObject;
+import com.ohgj.engine.Net.HTTP;
+import com.ohgj.engine.Net.HTTPListener;
 
 /**
  * Created by HellowPixl on 14.05.2017.
@@ -24,9 +27,23 @@ public class HoldUpGame extends MiniGame {
 
     private static int score;
     private static int highScore;
+    final String URL = "https://jsonblob.com/api/ab5ead67-38c9-11e7-ae4c-977a79dcd255";
 
     public void show() {
 
+
+
+        HTTP.get(URL, new HTTPListener() {
+            public void onFinish(String data) {
+                JSONObject json = new JSONObject(data);
+                String content = json.get("content").toString();
+
+                highScore = Integer.parseInt(content);
+                System.out.println("Got Highscore: "+ highScore);
+            }
+            public void onProgress(float percentage) {}
+            public void onFail(String error) {System.out.println(error);}
+        });
         //Disable the gravity
         world.setGravity(new Vector2(0, 0));
 
@@ -72,19 +89,32 @@ public class HoldUpGame extends MiniGame {
         }
 
     }
-    public static void addScore(int val){
+    public void addScore(int val){
         score += val;
     }
-    public static void setHighScore(int val){
+    public void setHighScore(int val){
         highScore = val;
+        HTTP.put(URL, "{\"content\":\"" + highScore + "\"}", new HTTPListener() {
+            public void onFinish(String data) {
+              System.out.println("Saved Highscore: "+highScore);
+            }
+
+            public void onProgress(float percentage) {
+
+            }
+
+            public void onFail(String error) {
+                System.out.println(error);
+            }
+        });
     }
-    public static int getHighScore(){
+    public int getHighScore(){
         return highScore;
     }
-    public static int getScore(){
+    public int getScore(){
         return score;
     }
-    public static void setScore(int val){
+    public void setScore(int val){
        score = val;
     }
 
