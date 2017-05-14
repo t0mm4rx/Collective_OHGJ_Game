@@ -1,16 +1,5 @@
 # Collective_OHGJ_Game
-A "Collective" game made by a comunity for a comunity.
-
-Devs:
-  - t0m
-  - DevilLime
-  - HellowPixl
-  
-Artists:
-  - t0m
-  - HellowPixl
-  
-
+A "Collective" game made by a comunity for a comunity.  
 
 TODO:
   - Improve Engine
@@ -29,8 +18,27 @@ In the code :
 ```java
 Texture a = new Texture("minigames/myawesomegame/a.png");
 ```
+# Artists
+### T0m:
+- Console (Main Room)
+- Floor tiles (Main Room)
 
-### Creating a minigame
+### Puarsliburf:
+- Rock (Crazy Road)
+
+# Developers
+### T0m:
+- Pong
+- Game Engine
+
+### HellowPixl:
+- HoldUp
+- Game Engine
+
+### DevilLime:
+- Crazy Road
+
+# Creating a minigame
 To create a mini game, create a class in the minigames package, wich extends the MiniGame class.
 Note that in this lib, 1 unit represents 100 pixels, so if you draw a square that's 1 width it will be 100 pixels width on the screen. Same for location and so (just like in Unity).
 *_Please create a new git branch for new minigames_*.
