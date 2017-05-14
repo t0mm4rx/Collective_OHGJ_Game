@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.ohgj.collectivegame.game.MiniGame;
+import com.ohgj.collectivegame.minigames.fallingApples.fallingApplesGame;
 import com.ohgj.collectivegame.minigames.notepad.Notepad;
 import com.ohgj.collectivegame.minigames.pong.PongGame;
 import com.ohgj.engine.Components.Transform;
@@ -46,7 +47,7 @@ public class ArcadeRoom extends Screen {
             return false;
         }));
         add(new Interactable(new Vector2(6, 5), Gdx.files.internal("console.png"), () -> {
-            System.out.println("2");
+            loadMiniGame(new fallingApplesGame());
             return false;
         }));
         add(new Interactable(new Vector2(7, 5), Gdx.files.internal("console.png"), () -> {
