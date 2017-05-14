@@ -76,15 +76,15 @@ public class Player extends AbstractGameObject {
 
     }
 
-    private Arcade getNearestArcade() {
-        Arcade a = null;
-        for (AbstractGameObject go : Game.getCurrentScreen().getGameObjectsByTag("Arcade")) {
-            ((Arcade) go).text.setColor(new Color(1, 1, 1, 0));
+    private Interactable getNearestArcade() {
+        Interactable a = null;
+        for (AbstractGameObject go : Game.getCurrentScreen().getGameObjectsByTag("Interactable")) {
+            ((Interactable) go).text.setColor(new Color(1, 1, 1, 0));
             if (a == null) {
-                a = ((Arcade) go);
+                a = ((Interactable) go);
             }
-            if (a.body.getBody().getPosition().dst(body.getBody().getPosition()) > ((Arcade)go).body.getBody().getPosition().dst(body.getBody().getPosition())) {
-                a = ((Arcade) go);
+            if (a.body.getBody().getPosition().dst(body.getBody().getPosition()) > ((Interactable)go).body.getBody().getPosition().dst(body.getBody().getPosition())) {
+                a = ((Interactable) go);
             }
         }
         return a;

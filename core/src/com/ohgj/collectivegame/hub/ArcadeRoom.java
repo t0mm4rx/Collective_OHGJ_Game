@@ -1,10 +1,10 @@
 package com.ohgj.collectivegame.hub;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.ohgj.collectivegame.game.MiniGame;
-import com.ohgj.collectivegame.minigames.TestMiniGame;
 import com.ohgj.collectivegame.minigames.pong.PongGame;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.Draw;
@@ -40,17 +40,15 @@ public class ArcadeRoom extends Screen {
         add(player);
 
         // Adding arcades
-        add(new Arcade(new Vector2(5, 5), () -> {
-            loadMiniGame(new TestMiniGame());
-            return false;
-        }));
-        add(new Arcade(new Vector2(6, 5), () -> {
-            // Here is the action that is called when we press enter next to the second arcade
-            // So it should load our
+        add(new Interactable(new Vector2(5, 5), Gdx.files.internal("console.png"), () -> {
             loadMiniGame(new PongGame());
             return false;
         }));
-        add(new Arcade(new Vector2(7, 5), () -> {
+        add(new Interactable(new Vector2(6, 5), Gdx.files.internal("console.png"), () -> {
+            System.out.println("2");
+            return false;
+        }));
+        add(new Interactable(new Vector2(7, 5), Gdx.files.internal("console.png"), () -> {
             System.out.println("3");
             return false;
         }));

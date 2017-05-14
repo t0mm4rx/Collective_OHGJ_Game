@@ -1,7 +1,9 @@
 package com.ohgj.collectivegame.hub;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.ohgj.collectivegame.GameClass;
@@ -16,21 +18,26 @@ import com.ohgj.engine.Game.AbstractGameObject;
 
 import java.util.concurrent.Callable;
 
-public class Arcade extends AbstractGameObject {
+public class Interactable extends AbstractGameObject {
 
     Body body;
     Text text;
     Callable action;
 
-    public Arcade(Vector2 position, Callable action) {
+    public Interactable(Vector2 position, FileHandle texture, Callable action) {
         super(new Transform(position));
 
         this.action = action;
 
-        body = new BoxBody(this, 0.4f, 0.3f, BodyDef.BodyType.StaticBody, false);
+        Texture t = new Texture(texture);
+        float width = new Float(t.getWidth()) / 100;
+        float height = new Float(t.getHeight()) / 100;
+        t.dispose();
+
+        body = new BoxBody(this, width, height, BodyDef.BodyType.StaticBody, false);
         addComponent(body);
 
-        addComponent(new SpriteRenderer(this, Gdx.files.internal("console.png"), 0, 0, 0.4f, 0.3f));
+        addComponent(new SpriteRenderer(this, texture, 0, 0, width, height));
 
         text = new Text(this, GameClass.font12, "Press enter", Color.WHITE);
         text.getColor().a = 0;
@@ -38,7 +45,7 @@ public class Arcade extends AbstractGameObject {
         addComponent(text);
 
         // We set a tag for the player can get them from the screen
-        setTag("Arcade");
+        setTag("Interactable");
     }
 
     public void doAction() {
