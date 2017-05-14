@@ -32,18 +32,27 @@ public class HoldUpGame extends MiniGame {
     public void show() {
 
 
+        try {
+            HTTP.get(URL, new HTTPListener() {
+                public void onFinish(String data) {
+                    JSONObject json = new JSONObject(data);
+                    String content = json.get("content").toString();
 
-        HTTP.get(URL, new HTTPListener() {
-            public void onFinish(String data) {
-                JSONObject json = new JSONObject(data);
-                String content = json.get("content").toString();
+                    highScore = Integer.parseInt(content);
+                    System.out.println("Got Highscore: " + highScore);
+                }
 
-                highScore = Integer.parseInt(content);
-                System.out.println("Got Highscore: "+ highScore);
-            }
-            public void onProgress(float percentage) {}
-            public void onFail(String error) {System.out.println(error);}
-        });
+                public void onProgress(float percentage) {
+                }
+
+                public void onFail(String error) {
+                    System.out.println(error);
+                }
+            });
+        }catch (Exception e){
+            highScore = 0;
+            e.printStackTrace();
+        }
         //Disable the gravity
         world.setGravity(new Vector2(0, 0));
 
@@ -94,19 +103,23 @@ public class HoldUpGame extends MiniGame {
     }
     public void setHighScore(int val){
         highScore = val;
-        HTTP.put(URL, "{\"content\":\"" + highScore + "\"}", new HTTPListener() {
-            public void onFinish(String data) {
-              System.out.println("Saved Highscore: "+highScore);
-            }
+        try {
+            HTTP.put(URL, "{\"content\":\"" + highScore + "\"}", new HTTPListener() {
+                public void onFinish(String data) {
+                    System.out.println("Saved Highscore: " + highScore);
+                }
 
-            public void onProgress(float percentage) {
+                public void onProgress(float percentage) {
 
-            }
+                }
 
-            public void onFail(String error) {
-                System.out.println(error);
-            }
-        });
+                public void onFail(String error) {
+                    System.out.println(error);
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public int getHighScore(){
         return highScore;
