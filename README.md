@@ -28,6 +28,7 @@ Texture a = new Texture("minigames/myawesomegame/a.png");
 
 ### Constantin (HP):
 - Tree (Crazy Road)
+- Road (Crazy Road)
 
 # Developers
 ### T0m:
