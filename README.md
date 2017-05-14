@@ -13,8 +13,12 @@ Artists:
 
 
 TODO:
-  - Base Engine.
-
+  - Improve Engine
+  - Add Games
+  - Add Rooms
+## Keys
+  
+  - DebugMode: "D"
 
 ## How it works
 
