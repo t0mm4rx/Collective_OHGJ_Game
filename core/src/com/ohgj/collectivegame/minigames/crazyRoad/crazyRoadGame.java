@@ -48,7 +48,8 @@ public class crazyRoadGame extends MiniGame{
             //Move Left
             Vector2 newPos = body.getBody().getPosition();
             newPos.x -= 1;
-            body.getBody().setTransform(newPos, 0);
+            if(newPos.x >= Game.center.x - 1.5f || newPos.x <=Game.center.x + 1.5f)
+                body.getBody().setTransform(newPos, 0);
 
 
             keyHeldDown = true;
@@ -57,7 +58,8 @@ public class crazyRoadGame extends MiniGame{
             //Move Right
             Vector2 newPos = body.getBody().getPosition();
             newPos.x += 1;
-            body.getBody().setTransform(newPos, 0);
+            if(newPos.x >= Game.center.x - 1.5f || newPos.x <=Game.center.x + 1.5f)
+                body.getBody().setTransform(newPos, 0);
 
 
             keyHeldDown = true;
