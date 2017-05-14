@@ -87,7 +87,7 @@ public class ArcadeRoom extends Screen {
 
     public void update() {
 
-        // If escape is pressed, the debug mode will be swithed
+        // If G is pressed, the debug mode will be swithed
         if (Keys.isKeyJustPressed(Input.Keys.G)) {
             Game.debugging = !Game.debugging;
         }
