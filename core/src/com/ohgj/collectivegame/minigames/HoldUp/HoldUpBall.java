@@ -20,6 +20,8 @@ public class HoldUpBall extends AbstractGameObject {
     Body body;
     Vector2 vel;
     ParticleManager pm;
+    private float Speed;
+
 
     public HoldUpBall() {
         super(new Transform(Game.center));
@@ -31,7 +33,7 @@ public class HoldUpBall extends AbstractGameObject {
         body.getBody().setFixedRotation(true);
 
         addComponent(new BoxRenderer(this, 0.1f, 0.1f, new Color(1, 1, 1, 1)));
-
+        Speed = 2.0f;
         pm = new ParticleManager(this);
         addComponent(pm);
 
@@ -48,7 +50,7 @@ public class HoldUpBall extends AbstractGameObject {
                     ((HoldUpPaddle) a).height = 1.1f;
                     vel.scl(1.1f);
                     shakeScreen(60);
-                    HoldUpGame.addScore(1);
+                    new HoldUpGame().addScore(1);
                 }
             }
 
@@ -61,14 +63,15 @@ public class HoldUpBall extends AbstractGameObject {
 
     protected void update(float delta) {
 
+
+        //Collison
         if (getTransform().getPosition().y <0) {
             init();
-            if(HoldUpGame.getHighScore()< HoldUpGame.getScore()) {
-                HoldUpGame.setHighScore(HoldUpGame.getScore());
+            if( new HoldUpGame().getHighScore()<  new HoldUpGame().getScore()) {
+                new HoldUpGame().setHighScore( new HoldUpGame().getScore());
             }
-            HoldUpGame.setScore(0);
+            new HoldUpGame().setScore(0);
         }
-
         if (getTransform().getPosition().x < 0 || getTransform().getPosition().x > Game.size.x) {
             vel.x = -vel.x;
         }
@@ -79,12 +82,14 @@ public class HoldUpBall extends AbstractGameObject {
 
     }
 
+
+
     public void shakeScreen(int intensity){
         Game.getCurrentScreen().shake(vel.len() / intensity,100f);
     }
 
     private void init() {
-        vel = Math.randomVector2(3);
+        vel = new Vector2(Speed,Speed);
         getTransform().getPosition().set(Game.center);
         body.getBody().setTransform(Game.center, 0);
     }
