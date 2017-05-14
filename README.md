@@ -26,12 +26,16 @@ Texture a = new Texture("minigames/myawesomegame/a.png");
 ### Puarsliburf:
 - Rock (Crazy Road)
 
+### Constantin (HP):
+- Tree (Crazy Road)
+- Road (Crazy Road)
+
 # Developers
 ### T0m:
 - Pong
 - Game Engine
 
-### HellowPixl:
+### Constantin (HP):
 - HoldUp
 - Game Engine
 
