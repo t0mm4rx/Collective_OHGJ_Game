@@ -18,7 +18,7 @@ TODO:
   - Add Rooms
 ## Keys
   
-  - DebugMode: "D"
+  - DebugMode: "G"
 
 ## How it works
 
