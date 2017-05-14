@@ -140,5 +140,46 @@ public class HTTP {
         }).start();
     }
 
+    public static void put(String _url, String data, HTTPListener listener) {
+        new Thread(() -> {
+            try {
+                StringBuilder result = new StringBuilder();
+                URL url = new URL(_url);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("PUT");
+                conn.setDoOutput(true);
+                OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+                out.write(data);
+                out.close();
+                int contentLength = conn.getContentLength();
+                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String line;
+                int readBytes = 0;
+                while ((line = rd.readLine()) != null) {
+                    result.append(line);
+                    if (contentLength != -1) {
+                        readBytes += line.getBytes("ISO-8859-2").length + 2;
+                        listener.onProgress((readBytes / contentLength) * 100);
+                    }
+                }
+                rd.close();
+                listener.onFinish(result.toString());
+                Thread.currentThread().interrupt();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+                listener.onFail("Protocol");
+                Thread.currentThread().interrupt();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                listener.onFail("URL");
+                Thread.currentThread().interrupt();
+            } catch (IOException e) {
+                listener.onFail("IOException");
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
 
 }

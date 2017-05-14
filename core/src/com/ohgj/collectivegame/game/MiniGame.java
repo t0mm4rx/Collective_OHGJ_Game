@@ -21,16 +21,20 @@ public abstract class MiniGame extends Screen{
     public void renderAfter() {
 
         if (Keys.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            if (!hasQuitted) {
-                fadeOut(0.4f);
-                Game.waitAndDo(400, () -> {
-                    setScreen(new ArcadeRoom(this.game));
-                    return false;
-                });
-                hasQuitted = true;
-            }
+            quit();
         }
 
+    }
+
+    public void quit() {
+        if (!hasQuitted) {
+            fadeOut(0.4f);
+            Game.waitAndDo(400, () -> {
+                setScreen(new ArcadeRoom(this.game));
+                return false;
+            });
+            hasQuitted = true;
+        }
     }
 
     public abstract void draw();
