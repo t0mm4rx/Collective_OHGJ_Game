@@ -1,9 +1,13 @@
 package com.ohgj.collectivegame.minigames.crazyRoad;
 
 import java.util.Random;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.ohgj.collectivegame.GameClass;
 import com.ohgj.collectivegame.game.MiniGame;
 import com.ohgj.engine.Components.Body;
 import com.ohgj.engine.Components.Transform;
@@ -13,41 +17,89 @@ import com.ohgj.engine.IO.Keys;
 
 public class crazyRoadGame extends MiniGame{
 
-    private String name = "Crazy Road";
+    String name = "Crazy Road";
 
-    Random random;
+    private Random random;
 
     private Player player;
     private int playerPos = 0;
     private boolean keyHeldDown = false;
 
-    private Obstacle[] obstacles = new Obstacle[]{};
-    private Vector2[] obstacleSpawns = new Vector2[] {new Vector2(Game.center.x, Game.center.y + 5)};
+    private Vector2[] obstacleSpawns = new Vector2[] {new Vector2(Game.center.x, Game.center.y + 5), new Vector2(Game.center.x + 1f, Game.center.y + 5), new Vector2(Game.center.x - 1f, Game.center.y + 5)};
+
+    private Texture road = new Texture("minigames/crazyRoad/roadLong.png");
+
+    private float time = 0f;
+    private float timer = 0.5f;
+
+    private int score = 0;
+    private int highScore = 0;
+    private boolean gameOn = false;
+    public boolean gameStart = true;
+    private boolean gameEnd = false;
 
     public void draw() {
-        Draw.rect(Game.center.x + 0.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
-        Draw.rect(Game.center.x - 0.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
+        Draw.texture(road, Game.center.x + 3, Game.center.y - 3, 3, 9);
 
-        Draw.rect(Game.center.x + 1.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
-        Draw.rect(Game.center.x - 1.5f, Game.center.y, 0.01f, 10f, new Color(1f, 1f, 1f, 1f));
+        if(gameOn || gameStart){
+            Draw.text("Score: " + score, Game.center.x - 5.25f, Game.center.y + 3.4f, new Color(1f, 1f, 1f, 1), GameClass.font15);
+            Draw.text("High score: " + highScore, Game.center.x - 5.25f, Game.center.y + 3f, new Color(1f, 1f, 1f, 1), GameClass.font15);
+        }
+        if(gameStart){
+            Draw.text("Press ENTER to start!", Game.center.x - 1.4f, Game.center.y - 1f, new Color(1f, 0.1f, 0.1f, 1f), GameClass.font20);
+        }
+
+        if(gameEnd){
+            Draw.text("Game Over!", Game.center.x - 1f, Game.center.y + 3.25f, new Color(1f, 0f, 0f, 1f), GameClass.font20);
+            Draw.text("      Score: " + score, Game.center.x - 1f, Game.center.y + 3f, new Color(1f, 0.25f, 0.25f, 1f), GameClass.font15);
+
+            Draw.text("Press ENTER to restart!", Game.center.x - 1.4f, Game.center.y + 1f, new Color(1f, 0.1f, 0.1f, 1f), GameClass.font20);
+        }
+
     }
 
     public void show() {
         random = new Random();
 
         //camera.position = new Vector3(Game.center.x, Game.center.y, camera.position.z);
-        //world.setGravity(new Vector2(0f, 0f));
+        world.setGravity(new Vector2(0f, -9.81f));
+
 
         player = new Player(new Transform(new Vector2(Game.center.x, Game.center.y - 2)));
 
         add(player);
 
-        createObstacle();
     }
 
     public void update() {
-        HandlePlayerInput(player.body, Input.Keys.A, Input.Keys.D);
-        HandlePlayerInput(player.body, Input.Keys.LEFT, Input.Keys.RIGHT);
+        time += Gdx.graphics.getDeltaTime();
+        if(gameOn){
+
+            if (time >= timer){
+                createObstacle();
+                time = 0;
+            }
+
+            HandlePlayerInput(player.body, Input.Keys.A, Input.Keys.D);
+            HandlePlayerInput(player.body, Input.Keys.LEFT, Input.Keys.RIGHT);
+        }
+
+
+        if (gameStart && Keys.isKeyJustPressed(Input.Keys.ENTER)){
+            gameOn = true;
+            gameStart = false;
+        }
+
+        if (gameEnd && Keys.isKeyJustPressed(Input.Keys.ENTER)){
+
+            if(score > highScore)
+                highScore = score;
+
+            score = 0;
+
+            gameStart = true;
+            gameEnd = false;
+        }
     }
 
     private void HandlePlayerInput(Body body, int left, int right){
@@ -89,14 +141,28 @@ public class crazyRoadGame extends MiniGame{
     }
 
     private void createObstacle(){
-        //Vector2 spawnPos = obstacleSpawns[random.nextInt(obstacleSpawns.length)];
+        int rand = random.nextInt(obstacleSpawns.length);
 
-        Vector2 spawnPos = new Vector2(Game.center.x, Game.center.y + 0);
+        Vector2 spawnPos = obstacleSpawns[rand];
 
         Obstacle obstacle = new Obstacle(new Transform(spawnPos));
-        //obstacles[obstacles.length + 1] = obstacle;
 
+        //System.out.print(rand);
         add(obstacle);
+    }
+
+    public void RemoveObstacle(Obstacle obstacle){
+        if(gameOn)
+            score++;
+
+        remove(obstacle);
+    }
+
+    public void GameOver(){
+        playerPos = 0;
+
+        gameOn = false;
+        gameEnd = true;
     }
 
 }

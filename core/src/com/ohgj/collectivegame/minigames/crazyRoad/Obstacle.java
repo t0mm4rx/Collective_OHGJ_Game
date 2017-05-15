@@ -10,6 +10,8 @@ import com.ohgj.engine.Components.BoxRenderer;
 import com.ohgj.engine.Components.SpriteRenderer;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.AbstractGameObject;
+import com.ohgj.engine.Game.Game;
+
 
 import java.util.Random;
 
@@ -35,6 +37,9 @@ public class Obstacle extends AbstractGameObject{
     }
 
     protected void update(float delta) {
+        if(body.getBody().getPosition().y <= Game.center.y - 4 || ((crazyRoadGame)Game.getCurrentScreen()).gameStart){
+            ((crazyRoadGame)Game.getCurrentScreen()).RemoveObstacle(this);
+        }
 
     }
 

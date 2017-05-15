@@ -22,9 +22,13 @@ public class HoldUpBall extends AbstractGameObject {
     ParticleManager pm;
     private float Speed;
 
+    private HoldUpGame holdUpGame;
+
 
     public HoldUpBall() {
         super(new Transform(Game.center));
+
+        holdUpGame = (HoldUpGame)Game.getCurrentScreen();
 
         body = new BoxBody(this, 0.1f, 0.1f, BodyDef.BodyType.DynamicBody, false);
         addComponent(body);
@@ -50,7 +54,7 @@ public class HoldUpBall extends AbstractGameObject {
                     ((HoldUpPaddle) a).height = 1.1f;
                     vel.scl(1.1f);
                     shakeScreen(60);
-                    new HoldUpGame().addScore(1);
+                    holdUpGame.addScore(1);
                 }
             }
 
@@ -67,10 +71,10 @@ public class HoldUpBall extends AbstractGameObject {
         //Collison
         if (getTransform().getPosition().y <0) {
             init();
-            if( new HoldUpGame().getHighScore()<  new HoldUpGame().getScore()) {
-                new HoldUpGame().setHighScore( new HoldUpGame().getScore());
+            if( holdUpGame.getHighScore()<  holdUpGame.getScore()) {
+                holdUpGame.setHighScore( holdUpGame.getScore());
             }
-            new HoldUpGame().setScore(0);
+            holdUpGame.setScore(0);
         }
         if (getTransform().getPosition().x < 0 || getTransform().getPosition().x > Game.size.x) {
             vel.x = -vel.x;
