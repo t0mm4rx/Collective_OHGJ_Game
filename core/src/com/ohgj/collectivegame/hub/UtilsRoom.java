@@ -15,13 +15,13 @@ import com.ohgj.engine.Game.Game;
 import com.ohgj.engine.Game.Screen;
 import com.ohgj.engine.IO.Keys;
 
-public class ArcadeRoom extends Screen {
+public class UtilsRoom extends Screen {
 
     Player player;
     boolean hasQuitted = false;
     public static Texture ground;
 
-    public ArcadeRoom(Game game) {
+    public UtilsRoom(Game game) {
         super(game);
     }
 
@@ -43,20 +43,14 @@ public class ArcadeRoom extends Screen {
         add(player);
 
         // Adding arcades
-        add(new Interactable(new Vector2(5, 5), Gdx.files.internal("console.png"), () -> {
-            loadMiniGame(new PongGame());
+
+        add(new Interactable(new Vector2(7, 5), Gdx.files.internal("notepad.png"), () -> {
+            loadMiniGame(new Notepad());
             return false;
-        },new PongGame()));
-        add(new Interactable(new Vector2(6, 5), Gdx.files.internal("console.png"), () -> {
-            loadMiniGame(new crazyRoadGame());
-            return false;
-        },new crazyRoadGame()));
-        add(new Interactable(new Vector2(7, 5), Gdx.files.internal("console.png"), () -> {
-            loadMiniGame(new HoldUpGame());
-            return false;
-        },new HoldUpGame()));
+        },new Notepad()));
+
         add(new Interactable(new Vector2(8, 4), Gdx.files.internal("portal.png"), () -> {
-            setScreen(new UtilsRoom(game));
+            setScreen(new ArcadeRoom(game));
             return false;
         },new Notepad()));
 
