@@ -46,19 +46,19 @@ public class ArcadeRoom extends Screen {
         add(new Interactable(new Vector2(5, 5), Gdx.files.internal("console.png"), () -> {
             loadMiniGame(new PongGame());
             return false;
-        },new PongGame()));
+        },new PongGame().getGameName()));
         add(new Interactable(new Vector2(6, 5), Gdx.files.internal("console.png"), () -> {
             loadMiniGame(new crazyRoadGame());
             return false;
-        },new crazyRoadGame()));
+        },new crazyRoadGame().getGameName()));
         add(new Interactable(new Vector2(7, 5), Gdx.files.internal("console.png"), () -> {
             loadMiniGame(new HoldUpGame());
             return false;
-        },new HoldUpGame()));
+        },new HoldUpGame().getGameName()));
         add(new Interactable(new Vector2(8, 4), Gdx.files.internal("portal.png"), () -> {
             setScreen(new UtilsRoom(game));
             return false;
-        },new Notepad()));
+        },"UtilsRoom"));
 
     }
 

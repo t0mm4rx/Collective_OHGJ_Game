@@ -27,7 +27,7 @@ public class Interactable extends AbstractGameObject {
 
 
 
-    public Interactable(Vector2 position, FileHandle texture, Callable action, MiniGame game) {
+    public Interactable(Vector2 position, FileHandle texture, Callable action, String name) {
         super(new Transform(position));
 
         this.action = action;
@@ -42,7 +42,7 @@ public class Interactable extends AbstractGameObject {
 
         addComponent(new SpriteRenderer(this, texture, 0, 0, width, height));
 
-        text = new Text(this, GameClass.font12, "Press enter to Join: \n"+game.getGameName(), Color.WHITE);
+        text = new Text(this, GameClass.font12, "Press enter to Join: \n"+name, Color.WHITE);
         text.getColor().a = 0;
         text.setOffset(-0.5f, 0.7f);
         addComponent(text);

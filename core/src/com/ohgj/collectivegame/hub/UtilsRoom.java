@@ -47,12 +47,12 @@ public class UtilsRoom extends Screen {
         add(new Interactable(new Vector2(7, 5), Gdx.files.internal("notepad.png"), () -> {
             loadMiniGame(new Notepad());
             return false;
-        },new Notepad()));
+        },new Notepad().getGameName()));
 
         add(new Interactable(new Vector2(8, 4), Gdx.files.internal("portal.png"), () -> {
             setScreen(new ArcadeRoom(game));
             return false;
-        },new Notepad()));
+        },"AecadeRoom"));
 
     }
 
