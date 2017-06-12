@@ -1,17 +1,13 @@
 package com.ohgj.collectivegame.hub;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.ohgj.collectivegame.GameClass;
-import com.ohgj.collectivegame.game.MiniGame;
 import com.ohgj.engine.Components.Body;
 import com.ohgj.engine.Components.BoxBody;
-import com.ohgj.engine.Components.BoxRenderer;
-import com.ohgj.engine.Components.ConeLight;
 import com.ohgj.engine.Components.SpriteRenderer;
 import com.ohgj.engine.Components.Text;
 import com.ohgj.engine.Components.Transform;

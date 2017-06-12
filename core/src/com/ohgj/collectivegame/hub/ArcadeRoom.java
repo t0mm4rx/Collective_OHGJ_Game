@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.ohgj.collectivegame.game.MiniGame;
 import com.ohgj.collectivegame.minigames.HoldUp.HoldUpGame;
 import com.ohgj.collectivegame.minigames.crazyRoad.crazyRoadGame;
-import com.ohgj.collectivegame.minigames.notepad.Notepad;
 import com.ohgj.collectivegame.minigames.pong.PongGame;
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.Draw;
@@ -55,7 +54,7 @@ public class ArcadeRoom extends Screen {
             loadMiniGame(new HoldUpGame());
             return false;
         },new HoldUpGame().getGameName()));
-        add(new Interactable(new Vector2(8, 4), Gdx.files.internal("portal.png"), () -> {
+        add(new Interactable(new Vector2(8, 3), Gdx.files.internal("portal.png"), () -> {
             setScreen(new UtilsRoom(game));
             return false;
         },"UtilsRoom"));

@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+
 import com.ohgj.collectivegame.game.MiniGame;
-import com.ohgj.collectivegame.minigames.HoldUp.HoldUpGame;
-import com.ohgj.collectivegame.minigames.crazyRoad.crazyRoadGame;
+
 import com.ohgj.collectivegame.minigames.notepad.Notepad;
-import com.ohgj.collectivegame.minigames.pong.PongGame;
+
 import com.ohgj.engine.Components.Transform;
 import com.ohgj.engine.Game.Draw;
 import com.ohgj.engine.Game.Game;
