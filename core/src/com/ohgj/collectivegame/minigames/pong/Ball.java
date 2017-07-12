@@ -56,6 +56,7 @@ public class Ball extends AbstractGameObject {
                     vel.y += Math.random(-0.4f, 0.4f);
                     ((Racket) a).height = 1.1f;
                     vel.scl(1.1f);
+                    System.out.println(vel.len()/20);
                     ((PongGame) Game.getCurrentScreen()).shake(vel.len() / 20, 100f);
                 }
             }

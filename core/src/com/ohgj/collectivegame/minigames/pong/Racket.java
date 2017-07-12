@@ -10,7 +10,7 @@ import com.ohgj.engine.Game.AbstractGameObject;
 
 public class Racket extends AbstractGameObject {
 
-    //This components will handle collisions
+
     Body body;
     public float width, height;
 
